@@ -26,6 +26,7 @@ class LinearRegression:
         self.lam = lam
         self.weights = None
         self.bias = None
+        self.theta = None
 
     def fit(self, X, y):
         """
@@ -74,6 +75,38 @@ class LinearRegression:
             self.weights -= self.lr * dw
             self.bias -= self.lr * db
 
+    def equation_fit(self, X, y):
+        """
+        Fit the model using the closed-form solution (Normal Equation).
+
+        Theta = (X^T * X)^-1 * X^T * y
+
+        Parameters
+        ----------
+        X : array-like, shape (n_samples, n_features)
+            Training input data.
+        y : array-like, shape (n_samples,)
+            Target values.
+
+        Returns
+        -------
+        self : Theta coffecient
+            Coefficient of the trained model.
+        """
+        X = np.array(X)
+        y = np.array(y)
+
+        # Add a column of ones to X matrix for the intercept (bias term)
+        ones = np.ones((X.shape[0], 1))
+        X = np.hstack((ones, X))
+
+        A = X.T @ X
+        b = X.T @ y
+
+        # Solve for theta directly without inversion ,inversion - more error prone .
+        # linalg.solve used LU decomposition to solve equation making it much faster.
+        self.theta = np.linalg.solve(A, b)
+
     def predict(self, X):
         """
         Make predictions on new data.
@@ -90,4 +123,28 @@ class LinearRegression:
         """
         X = np.array(X)
         y_hat = X @ self.weights + self.bias
+        return y_hat
+
+    def equation_predict(self, X):
+        """
+        Make predictions using the closed-form solution.
+
+        Y = X * Theta
+
+        Parameters
+        ----------
+        X : array-like, shape (n_samples, n_features)
+            Input data to predict on.
+
+        Returns
+        -------
+        np.ndarray, shape (n_samples,)
+            Predicted values.
+        """
+        # Add a column of ones to X matrix for the intercept (bias term)
+        ones = np.ones((X.shape[0], 1))
+        X = np.hstack((ones, X))
+
+        X = np.array(X)
+        y_hat = X @ self.theta
         return y_hat
