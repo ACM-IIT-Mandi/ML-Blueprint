@@ -1,6 +1,19 @@
-"""Probabilistic models.
+"""Probabilistic models built directly out of probability."""
 
-Models built directly out of probability, rather than just a formula.
-"""
+from .naive_bayes import (
+    CategoricalNB,
+    CategoricalNBScratch,
+    GaussianNB,
+    GaussianNBScratch,
+    MultinomialNB,
+    MultinomialNBScratch,
+)
 
-__all__: list[str] = []
+__all__ = [
+    "GaussianNB",
+    "GaussianNBScratch",
+    "CategoricalNB",
+    "CategoricalNBScratch",
+    "MultinomialNB",
+    "MultinomialNBScratch",
+]
