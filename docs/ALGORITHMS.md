@@ -51,7 +51,7 @@ request that adds the algorithm.
 
 | Algorithm | Maintainer |
 |---|---|
-| _none yet_ |
+| Naive Bayes (Gaussian, Categorical, Multinomial) | @dakshrathi-india |
 
 ## Optimisers
 
