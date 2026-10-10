@@ -100,12 +100,17 @@ class LinearRegression:
         ones = np.ones((X.shape[0], 1))
         X = np.hstack((ones, X))
 
-        A = X.T @ X
+        I = np.eye(X.shape[1])
+        I[0, 0] = 0
+
+        A = X.T @ X + self.lam * I
         b = X.T @ y
 
         # Solve for theta directly without inversion ,inversion - more error prone .
         # linalg.solve used LU decomposition to solve equation making it much faster.
         self.theta = np.linalg.solve(A, b)
+        self.bias = self.theta[0]
+        self.weights = self.theta[1:]
 
     def predict(self, X):
         """
