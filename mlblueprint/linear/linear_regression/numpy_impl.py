@@ -50,8 +50,8 @@ class LinearRegression:
         n_samples, n_features = X.shape
 
         # init parameters
-        self.weights = np.random.random(n_features)
-        self.bias = np.random.random()
+        self.weights = np.zeros(n_features)
+        self.bias = 0
 
         # training loop
         for epoch in range(self.n_iters):
@@ -59,16 +59,18 @@ class LinearRegression:
             y_hat = X @ self.weights + self.bias
 
             # loss
-            mse = np.mean((y_hat - y) ** 2) / 2 + self.lam * np.sum(self.weights**2)
+            mse = np.mean((y_hat - y) ** 2) / 2 + (self.lam / (2 * n_samples)) * np.sum(
+                self.weights**2
+            )
 
             # print loss
             if epoch % 100 == 0:
                 print(f"epoch {epoch} loss: {mse}")
 
             # backpropagation
-            dw = (1 / n_samples) * (
-                np.dot(X.T, y_hat - y)
-            ) + 2 * self.lam * self.weights
+            dw = (1 / n_samples) * (np.dot(X.T, y_hat - y)) + (
+                self.lam / n_samples
+            ) * self.weights
             db = (1 / n_samples) * (np.sum(y_hat - y))
 
             # update
