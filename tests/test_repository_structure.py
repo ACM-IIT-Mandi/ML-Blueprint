@@ -139,7 +139,7 @@ def test_algorithm_readmes_declare_a_maturity_level():
         readme = folder / "README.md"
         if not readme.is_file():
             continue  # reported by the template test
-        if not any(level in readme.read_text() for level in levels):
+        if not any(level in readme.read_text(encoding="utf-8") for level in levels):
             missing.append(str(folder.relative_to(REPO_ROOT)))
 
     assert not missing, (
