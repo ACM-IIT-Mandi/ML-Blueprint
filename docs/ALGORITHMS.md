@@ -43,7 +43,7 @@ request that adds the algorithm.
 
 | Algorithm | Maintainer |
 |---|---|
-| _none yet_ |
+| SVM Classifier | @VedanshTyagi |
 
 ## Probabilistic models
 

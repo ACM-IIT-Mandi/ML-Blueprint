@@ -50,7 +50,7 @@ class SvmClassification:
         scores = self.decision_function(X)
         losses = self.hinge_loss(y, scores)
 
-        regularization = 0.5 * sum(w ** 2 for w in self.weights)
+        regularization = 0.5 * sum(w**2 for w in self.weights)
         total_loss = regularization + C * sum(losses)
 
         return total_loss

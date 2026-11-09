@@ -43,7 +43,7 @@ class SvmClassification:
         scores = self.decision_function(X)
         hinge_loss = np.maximum(0, 1 - y * scores)
 
-        return 0.5 * np.sum(self.weights ** 2) + C * np.sum(hinge_loss)
+        return 0.5 * np.sum(self.weights**2) + C * np.sum(hinge_loss)
 
     def fit(self, X, y, lr=0.01, n_iters=1000, C=1.0):
         """
