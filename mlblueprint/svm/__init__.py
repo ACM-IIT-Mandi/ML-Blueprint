@@ -2,6 +2,15 @@
 
 Classifiers that try to draw the widest possible boundary between classes, and the
 kernel trick that lets them handle curved boundaries too.
+
+Algorithms
+----------
+- `SvmClassification`: SVM classification using NumPy.
 """
 
-__all__: list[str] = []
+from .svm_classification import SvmClassification, SvmClassificationScratch
+
+__all__: list[str] = [
+    "SvmClassification",
+    "SvmClassificationScratch",
+]
